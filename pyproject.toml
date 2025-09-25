@@ -1,0 +1,46 @@
+[project]
+name = "django-blog-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django>=5.2.6",
+    "pillow>=11.3.0",
+]
+
+[dependency-groups]
+dev = [
+    "django-browser-reload>=1.21.0",
+    "ruff>=0.13.2",
+    "taskipy>=1.14.1",
+]
+
+[tool.ruff]
+line-length = 79
+extend-exclude = [
+    'migrations',
+    'settings.py',
+    'manage.py',
+]
+
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.taskipy.tasks]
+lint = 'ruff check'
+pre_format = 'ruff check --fix'
+format = 'ruff format'
+
+pre_run = 'task format'
+run = 'python manage.py runserver'
+
+pre_migrate = 'python manage.py makemigrations'
+migrate = 'python manage.py migrate'
+
+app = 'python manage.py startapp'
