@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, View
 
@@ -24,7 +24,11 @@ class UserLoginView(LoginView):
     template_name = 'login.html'
     authentication_form = AuthenticationForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('article_list')
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'profile_detail', kwargs={'pk': self.request.user.pk}
+        )
 
 
 class UserLogoutView(LogoutView):
@@ -34,11 +38,11 @@ class UserLogoutView(LogoutView):
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'profile.html'
+    context_object_name = 'profile'
 
 
 class ProfileUpdateView(View):
-    @staticmethod
-    def post(request):
+    def post(self, request):
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(
             request.POST,
@@ -50,7 +54,10 @@ class ProfileUpdateView(View):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Perfil atualizado com sucesso!')
-            return redirect('profile')
+            return reverse_lazy(
+                'profile_detail', kwargs={'pk': self.object.pk}
+            )
+
         else:
             messages.error(request, 'Por favor, corrija os erros abaixo.')
 
