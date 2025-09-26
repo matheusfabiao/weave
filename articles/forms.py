@@ -7,3 +7,8 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ['title', 'content']
+
+
+class CommentForm(forms.Form):
+    author = forms.CharField(max_length=100, required=False, label='Nome')
+    text = forms.CharField(widget=forms.Textarea, label='Comentário')

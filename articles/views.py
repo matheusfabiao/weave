@@ -9,9 +9,14 @@ from django.views.generic import (
     View,
 )
 
-from .forms import ArticleForm
+from .forms import ArticleForm, CommentForm
 from .models import Article
-from .services import add_like, get_article_likes
+from .services import (
+    add_comment,
+    add_like,
+    get_article_comments,
+    get_article_likes,
+)
 
 
 class ArticleListView(ListView):
@@ -30,6 +35,8 @@ class ArticleDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         article_id = self.object.id
         context['likes'] = get_article_likes(article_id)
+        context['comments'] = get_article_comments(article_id)
+        context['comment_form'] = CommentForm()
         return context
 
 
@@ -59,4 +66,15 @@ class ArticleLikeView(View):
     @staticmethod
     def post(request, pk):
         add_like(pk)
+        return redirect('article_detail', pk=pk)
+
+
+class ArticleCommentView(View):
+    @staticmethod
+    def post(request, pk):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            add_comment(
+                pk, form.cleaned_data['author'], form.cleaned_data['text']
+            )
         return redirect('article_detail', pk=pk)

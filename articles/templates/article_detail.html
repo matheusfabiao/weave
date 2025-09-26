@@ -9,6 +9,27 @@
     <button type="submit">Curtir 👍</button>
 </form>
 
+<hr>
+<h3>Comentários</h3>
+<ul>
+    {% for comment in comments %}
+        <li>
+            <strong>{{ comment.author }}:</strong> {{ comment.text }}
+            <br>
+            <small>{{ comment.created_at }}</small>
+        </li>
+    {% empty %}
+        <li>Sem comentários ainda.</li>
+    {% endfor %}
+</ul>
+
+<h4>Adicionar Comentário</h4>
+<form action="{% url 'article_comment' article.pk %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+
 <a href="{% url 'article_edit' article.pk %}">Editar</a> |
 <a href="{% url 'article_delete' article.pk %}">Excluir</a> |
 <a href="{% url 'article_list' %}">Voltar</a>
