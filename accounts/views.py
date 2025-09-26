@@ -42,7 +42,7 @@ class ProfileDetailView(DetailView):
 
 
 class ProfileUpdateView(View):
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(
             request.POST,
@@ -65,10 +65,10 @@ class ProfileUpdateView(View):
             'user_form': user_form,
             'profile_form': profile_form,
         }
-        return render(request, 'profile.html', context)
+        return render(request, 'profile_update.html', context)
 
     @staticmethod
-    def get(request):
+    def get(request, *args, **kwargs):
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(
             instance=request.user.profile,
@@ -78,4 +78,4 @@ class ProfileUpdateView(View):
             'user_form': user_form,
             'profile_form': profile_form,
         }
-        return render(request, 'profile.html', context)
+        return render(request, 'profile_update.html', context)
