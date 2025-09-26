@@ -24,7 +24,7 @@ class UserLoginView(LoginView):
     template_name = 'login.html'
     authentication_form = AuthenticationForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('article_list')
 
 
 class UserLogoutView(LogoutView):
