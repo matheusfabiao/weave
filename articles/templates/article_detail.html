@@ -1,42 +1,93 @@
-<h1>{{ article.title }}</h1>
-<p>{{ article.content }}</p>
-<p>Autor(a): {{ article.author }}</p>
-<p><i>Criado em: {{ article.created_at }}</i></p>
+{% extends "base.html" %}
 
-<hr>
-<h3>Likes: {{ likes }}</h3>
-<form action="{% url 'article_like' article.pk %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Curtir 👍</button>
-</form>
+{% block title %}Detalhes{% endblock title %}
 
-<hr>
-<h3>Comentários</h3>
-<ul>
-    {% for comment in comments %}
-        <li>
-            <strong>{{ comment.author }}:</strong> {{ comment.text }}
-            <br>
-            <small>{{ comment.created_at }}</small>
-        </li>
-    {% empty %}
-        <li>Sem comentários ainda.</li>
-    {% endfor %}
-</ul>
+{% block content %}
 
-<h4>Adicionar Comentário</h4>
-{% if user.is_authenticated %}
-    <form action="{% url 'article_comment' article.pk %}" method="post">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit">Enviar</button>
-    </form>
-{% else %}
-    <p>
-        Você precisa <a href="{% url 'login' %}?next={% url 'article_detail' article.pk %}">fazer login</a> para comentar.
-    </p>
-{% endif %}
+    <section class="py-5">
+        <div class="container">
+            <div class="card p-4">
+                <div class="card-header">
+                    <h1 class="display-6 text-center fw-bold mb-4">{{ article.title }}</h1>
+                    <div class="d-flex align-items-center justify-content-center mb-3">
+                        <img src="{{ article.author.picture.url }}" alt="{{ article.author.username }}" class="rounded-circle me-3" style="max-width: 50px; max-height: 50px;">
+                        <div>
+                            <p class="fs-6 fw-bold mb-0">Autor: {{ article.author.user.username }}</p>
+                            <p class="mb-0"><small class="text-muted">{{ article.created_at }}</small></p>
+                        </div>
+                    </div>
+                </div>
 
-<a href="{% url 'article_edit' article.pk %}">Editar</a> |
-<a href="{% url 'article_delete' article.pk %}">Excluir</a> |
-<a href="{% url 'article_list' %}">Voltar</a>
+                <div class="card-body">
+                    <p class="card-text mb-4">{{ article.content }}</p>
+
+                    {% comment %} Tags {% endcomment %}
+                    {% if article.tags.exists %}
+                        {% for tag in article.tags.all %}
+                            <span class="badge bg-success me-2">{{ tag.name }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="card-footer mt-4">
+
+                    {% comment %} Likes {% endcomment %}
+                    <form action="{% url "article_like" article.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-primary mt-4 fs-5">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <span class="ms-2">{{ likes }}</span>
+                        </button>
+                    </form>
+
+                    {% comment %} Comentários {% endcomment %}
+                    <h6 class="fs-4 fw-bold mt-4">Comentários</h6>
+                    {% for comment in comments %}
+                    
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ comment.author.picture.url }}" alt="{{ comment.author.full_name }}">
+                                    <div>
+                                        <p class="fs-6 fw-bold mb-0">Autor: {{ comment.author.full_name }}</p>
+                                        <p class="mb-0"><small class="text-muted">{{ comment.created_at }}</small></p>
+                                    </div>
+                                </div>
+                                <p class="card-text">{{ comment.text }}</p>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>Sem comentários ainda.</p>
+                    {% endfor %}
+
+                    {% comment %} Formulário de Comentar {% endcomment %}
+                    <h6 class="fw-bold mt-4">Adicionar Comentário</h6>
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'article_comment' article.pk %}" method="post" class="mb-5">
+                            {% csrf_token %}
+                            {{ comment_form.as_p }}
+                            <button type="submit" class="btn btn-info">Enviar</button>
+                        </form>
+                    {% else %}
+                        <p>
+                            Você precisa <a class="badge badge-warning" href="{% url 'login' %}?next={% url 'article_detail' article.pk %}">fazer login</a> para comentar.
+                        </p>
+                    {% endif %}
+
+                    {% comment %} Controles {% endcomment %}
+                    <div class="d-flex align-items-center gap-2">
+                        {% if request.user.is_authenticated and request.user == article.author.user %}
+                        
+                            <a href="{% url 'article_edit' article.pk %}" class="btn btn-outline-success">Editar</a>
+                            <a href="{% url 'article_edit' article.pk %}" class="btn btn-outline-danger">Excluir</a>
+                            
+                        {% endif %}
+                            
+                        <a href="{% url 'article_edit' article.pk %}" class="btn btn-outline-dark">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
