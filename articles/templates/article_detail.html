@@ -1,0 +1,7 @@
+<h1>{{ article.title }}</h1>
+<p>{{ article.content }}</p>
+<p><i>Criado em: {{ article.created_at }}</i></p>
+
+<a href="{% url 'article_edit' article.pk %}">Editar</a> |
+<a href="{% url 'article_delete' article.pk %}">Excluir</a> |
+<a href="{% url 'article_list' %}">Voltar</a>

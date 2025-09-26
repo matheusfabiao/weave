@@ -1,0 +1,7 @@
+<h1>{{ view.object|default:"Novo Artigo" }}</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Salvar</button>
+</form>
+<a href="{% url 'article_list' %}">Cancelar</a>
