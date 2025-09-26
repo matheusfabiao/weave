@@ -41,11 +41,15 @@ class ArticleDetailView(DetailView):
         return context
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     form_class = ArticleForm
     template_name = 'article_form.html'
     success_url = reverse_lazy('article_list')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user.profile
+        return super().form_valid(form)
 
 
 class ArticleUpdateView(UpdateView):
