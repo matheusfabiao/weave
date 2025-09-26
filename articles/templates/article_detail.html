@@ -24,11 +24,17 @@
 </ul>
 
 <h4>Adicionar Comentário</h4>
-<form action="{% url 'article_comment' article.pk %}" method="post">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit">Enviar</button>
-</form>
+{% if user.is_authenticated %}
+    <form action="{% url 'article_comment' article.pk %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+{% else %}
+    <p>
+        Você precisa <a href="{% url 'login' %}?next={% url 'article_detail' article.pk %}">fazer login</a> para comentar.
+    </p>
+{% endif %}
 
 <a href="{% url 'article_edit' article.pk %}">Editar</a> |
 <a href="{% url 'article_delete' article.pk %}">Excluir</a> |

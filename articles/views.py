@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -69,12 +70,14 @@ class ArticleLikeView(View):
         return redirect('article_detail', pk=pk)
 
 
-class ArticleCommentView(View):
+class ArticleCommentView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('login')
+    redirect_field_name = 'next'
+
     @staticmethod
     def post(request, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
-            add_comment(
-                pk, form.cleaned_data['author'], form.cleaned_data['text']
-            )
+            author = request.user.username
+            add_comment(pk, author, form.cleaned_data['text'])
         return redirect('article_detail', pk=pk)
