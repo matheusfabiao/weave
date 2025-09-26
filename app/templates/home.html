@@ -1,0 +1,9 @@
+<h1>Home</h1>
+{% for article in articles %}
+
+    <hr>
+    <h3>{{ article.title }}</h3>
+    <p>{{ article.content | truncatechars:200 }}</p>
+    <br>
+
+{% endfor %}
