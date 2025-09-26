@@ -86,7 +86,11 @@
                             <p class="card-text">{{ article.content | truncatechars:300 }}</p>
                         {% endif %}
 
-                        {% if article.tags.exists %}{% for tag in article.tags.all %}<span class="badge bg-success me-2">{{ tag.name }}</span>{% endfor %}{% endif %}
+                        {% if article.tags.exists %}
+                            {% for tag in article.tags.all %}
+                                <span class="badge bg-success me-2">{{ tag.name }}</span>
+                            {% endfor %}
+                        {% endif %}
 
                         <div class="mt-4">
                             <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">Leia mais</a>
