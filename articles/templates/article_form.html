@@ -1,7 +1,26 @@
-<h1>{{ view.object|default:"Novo Artigo" }}</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Salvar</button>
-</form>
-<a href="{% url 'article_list' %}">Cancelar</a>
+{% extends "base.html" %}
+
+{% block title %}Novo Artigo{% endblock title %}
+
+{% block content %}
+
+  <section class="py-5">
+    <div class="container">
+      <div class="card p-4">
+        <div class="card-body">
+          <h1 class="display-5 fw-bold mb-2">Criar Novo Artigo</h1>
+          <p class="text-muted fs-5 mb-5">Compartilhe suas ideias com a comunidade.</p>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex align-items-center gap-2 mt-5">
+              <button type="submit" class="btn btn-primary">Publicar</button>
+              <a href="{% url 'article_list' %}" class="btn btn-outline-dark">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
