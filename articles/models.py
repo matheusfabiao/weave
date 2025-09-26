@@ -12,6 +12,8 @@ class Article(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        if len(self.title) > 50:  # noqa
+            return self.title[:50] + '...'
         return self.title
 
     class Meta:
