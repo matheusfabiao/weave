@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Weave | {% block title %}{% endblock title %}
+    </title>
+    {% comment %} Bootstrap CSS (Bootswatch) {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
+    {% comment %} Bootstrap Icons {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    {% comment %} Bootstrap JS {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
+    {% comment %} Custom CSS (if needed) {% endcomment %}
+    {% block css %}{% endblock css %}
+</head>
+<body>
+
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    {% comment %} Custom JS (if needed) {% endcomment %}
+    {% block js %}{% endblock js %}
+</body>
+</html>

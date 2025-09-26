@@ -1,9 +1,61 @@
-<h1>Home</h1>
-{% for article in articles %}
+{% extends "base.html" %}
 
-    <hr>
-    <h3>{{ article.title }}</h3>
-    <p>{{ article.content | truncatechars:200 }}</p>
-    <br>
+{% block title %}Início{% endblock title %}
 
-{% endfor %}
+{% block content %}
+
+    <section class="py-5">
+        <div class="container">
+            <h1 class="display-3 text-center fw-bold mb-4 mx-auto" style="max-width: 900px;">
+                Uma Rede Social para Devs, Criadores&nbsp;e Inovadores
+            </h1>
+            <p class="lead text-center mx-auto mb-4" style="max-width: 900px;">
+                Conecte-se, compartilhe conhecimento e fique por dentro das últimas tendências do universo da tecnologia. Um espaço feito por e para a comunidade tech.
+            </p>
+
+            <div class="text-center">
+                <a href="{% url 'article_list' %}" class="btn btn-primary btn-lg fs-6">
+                    Explorar o Weave <span><i class="bi bi-arrow-right ms-2"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4 about-cards">
+                {% comment %} Card 1 {% endcomment %}
+                <div class="col">
+                    <div class="card h-100 text-center p-3 border">
+                        <div class="card-body">
+                            <i class="bi bi-code-slash display-1 text-primary"></i>
+                            <h5 class="card-title fw-bold mt-3">Compartilhe Conhecimento</h5>
+                            <p class="card-text">Publique artigos, tutoriais e insights sobre suas tecnologias favoritas.</p>
+                        </div>
+                    </div>
+                </div>
+                {% comment %} Card 2 {% endcomment %}
+                <div class="col">
+                    <div class="card h-100 text-center p-3 border">
+                        <div class="card-body">
+                            <i class="bi bi-people display-1 text-primary"></i>
+                            <h5 class="card-title fw-bold mt-3">Conecte-se com a Comunidade</h5>
+                            <p class="card-text">Encontre e interaja com outros desenvolvedores, designers e entusiastas.</p>
+                        </div>
+                    </div>
+                </div>
+                {% comment %} Card 3 {% endcomment %}
+                <div class="col">
+                    <div class="card h-100 text-center p-3 border">
+                        <div class="card-body">
+                            <i class="bi bi-graph-up-arrow display-1 text-primary"></i>
+                            <h5 class="card-title fw-bold mt-3">Descubra Tendências</h5>
+                            <p class="card-text">Mantenha-se atualizado com as últimas discussões e novidades do mercado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
