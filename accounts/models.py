@@ -3,13 +3,20 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
 
+LOCALITY_CHOICES = (
+    ('USA', 'Estados Unidos'),
+    ('BRAZIL', 'Brasil'),
+)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='profile'
     )
     bio = models.TextField(max_length=500, blank=True, null=True)
-    location = models.CharField(max_length=30, blank=True, null=True)
+    location = models.CharField(
+        max_length=30, blank=True, null=True, choices=LOCALITY_CHOICES
+    )
     phone = models.CharField(max_length=20, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     picture = models.ImageField(
