@@ -5,7 +5,8 @@ from accounts.models import Profile
 
 class Article(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
+    resume = models.TextField(max_length=255, blank=True, null=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
