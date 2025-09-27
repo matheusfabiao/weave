@@ -61,7 +61,7 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 
 class ArticleDeleteView(DeleteView):
     model = Article
-    template_name = 'article_confirm_delete.html'
+    template_name = 'article_delete.html'
     success_url = reverse_lazy('article_list')
 
 
