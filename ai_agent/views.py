@@ -1,11 +1,10 @@
 from django.shortcuts import redirect, render
 from django.views.generic import View
-from markdown import markdown
 
 from articles.models import Article
 
 from .forms import AIArticleForm
-from .utils import generate_ai_prompt, generate_ai_response
+from .utils import generate_ai_article
 
 
 class AIArticleCreateView(View):
@@ -14,14 +13,13 @@ class AIArticleCreateView(View):
         form = AIArticleForm(request.POST)
         if form.is_valid():
             instructions = form.cleaned_data
-            prompt = generate_ai_prompt(
+            content = generate_ai_article(
                 title=instructions.get('title'),
                 idea=instructions.get('idea'),
                 audience=instructions.get('audience'),
                 tone=instructions.get('tone'),
                 extra_notes=instructions.get('extra_notes'),
             )
-            content = markdown(generate_ai_response(prompt))
             Article.objects.create(
                 author=request.user.profile,
                 title=instructions.get('title'),
