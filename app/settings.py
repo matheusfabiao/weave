@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'articles',
     'accounts',
+    'ai_agent',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,5 @@ if not firebase_admin._apps:
     firebase_admin.initialize_app(cred, {
         "databaseURL": config('FIREBASE_DATABASE_URL')
     })
+
+GEMINI_API_KEY = config('GEMINI_API_KEY')

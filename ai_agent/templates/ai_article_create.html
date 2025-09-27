@@ -1,0 +1,7 @@
+<!-- templates/posts/create_post_ai.html -->
+<h2>Gerar Post com IA</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Gerar</button>
+</form>

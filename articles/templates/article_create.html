@@ -15,6 +15,7 @@
             {{ form.as_p }}
             <div class="d-flex align-items-center gap-2 mt-5">
               <button type="submit" class="btn btn-primary">Publicar</button>
+              <a href="{% url 'article_create_ai' %}" class="btn btn-info">✦ Crie com IA</a>
               <a href="{% url 'article_list' %}" class="btn btn-outline-dark">Cancelar</a>
             </div>
           </form>

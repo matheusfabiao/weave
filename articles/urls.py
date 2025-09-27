@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from .views import (
     ArticleCommentView,
@@ -26,4 +26,5 @@ urlpatterns = [
         ArticleCommentView.as_view(),
         name='article_comment',
     ),
+    path('ai/', include('ai_agent.urls')),
 ]
