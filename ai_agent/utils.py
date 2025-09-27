@@ -7,7 +7,7 @@ from google.genai import types
 
 def generate_ai_prompt(title, idea, audience, tone, extra_notes):
     return dedent(f"""\
-        Crie um artigo com as seguintes instruções:
+        Crie um breve artigo com as seguintes instruções:
         - Título: {title}
         - Ideia central: {idea}
         - Público-alvo: {audience}
@@ -17,7 +17,9 @@ def generate_ai_prompt(title, idea, audience, tone, extra_notes):
         O artigo deve ser estruturado e coeso, com parágrafos bem escritos,
         Entregue APENAS o conteúdo do artigo, sem nenhum comentário,
         pergunta ou explicação extra.
-        Não utilize nenhum tipo de emoji ou simbologia Markdown, por favor.
+        Faça subtítulos dentro do conteúdo, se necessário, com '##'.
+        Não adicione o título principal (#) dentro do conteúdo.
+        Utilize simbologia markdown para a escrita do artigo.
     """)
 
 

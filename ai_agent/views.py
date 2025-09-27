@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views.generic import View
+from markdown import markdown
 
 from articles.models import Article
 
@@ -20,7 +21,7 @@ class AIArticleCreateView(View):
                 tone=instructions.get('tone'),
                 extra_notes=instructions.get('extra_notes'),
             )
-            content = generate_ai_response(prompt)
+            content = markdown(generate_ai_response(prompt))
             Article.objects.create(
                 author=request.user.profile,
                 title=instructions.get('title'),

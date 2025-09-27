@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="card-body">
-                    <p class="card-text mb-4">{{ article.content }}</p>
+                    <p class="card-text mb-4">{{ article.content|safe }}</p>
 
                     {% comment %} Tags {% endcomment %}
                     {% if article.tags.exists %}
