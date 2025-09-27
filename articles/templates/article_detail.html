@@ -35,15 +35,20 @@
                     <div class="d-flex align-items-center gap-3 mt-4">
                         <form action="{% url "article_like" article.pk %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-primary fs-5">
+                            <button type="submit" class="btn btn-outline-primary">
                                 <i class="bi bi-hand-thumbs-up"></i>
                                 <span class="ms-2">{{ likes }}</span>
                             </button>
                         </form>
+
+                        <button class="btn btn-outline-info">
+                            <i class="bi bi-chat"></i>
+                            <span class="ms-2">{{ comments|length }}</span>
+                        </button>
     
                         {% comment %} Controles {% endcomment %}
                         {% if request.user.is_authenticated and request.user == article.author.user %}
-                            <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex align-items-center gap-3">
                             
                                 <a href="{% url 'article_update' article.pk %}" class="btn btn-outline-success">Editar</a>
                                 <a href="{% url 'article_delete' article.pk %}" class="btn btn-outline-danger">Excluir</a>
