@@ -44,7 +44,7 @@ class ArticleDetailView(DetailView):
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     form_class = ArticleForm
-    template_name = 'article_form.html'
+    template_name = 'article_create.html'
     success_url = reverse_lazy('article_list')
 
     def form_valid(self, form):
@@ -52,10 +52,10 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
     form_class = ArticleForm
-    template_name = 'article_form.html'
+    template_name = 'article_update.html'
     success_url = reverse_lazy('article_list')
 
 
