@@ -2,10 +2,20 @@ from django import forms
 
 
 class AIArticleForm(forms.Form):
-    title = forms.CharField(max_length=255, label='Título')
-    idea = forms.CharField(widget=forms.Textarea, label='Ideia Central')
+    title = forms.CharField(
+        max_length=255,
+        label='Título',
+        widget=forms.TextInput({'class': 'form-control'}),
+    )
+    idea = forms.CharField(
+        label='Ideia Central',
+        widget=forms.Textarea({'class': 'form-control'}),
+    )
     audience = forms.CharField(
-        max_length=255, required=False, label='Público Alvo'
+        max_length=255,
+        required=False,
+        label='Público Alvo',
+        widget=forms.TextInput({'class': 'form-control'}),
     )
     tone = forms.ChoiceField(
         choices=[
@@ -15,7 +25,10 @@ class AIArticleForm(forms.Form):
         ],
         initial='formal',
         label='Tom',
+        widget=forms.Select({'class': 'form-control'}),
     )
     extra_notes = forms.CharField(
-        widget=forms.Textarea, required=False, label='Observações extras'
+        required=False,
+        label='Observações extras',
+        widget=forms.Textarea({'class': 'form-control'}),
     )
