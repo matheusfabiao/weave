@@ -22,4 +22,7 @@ class ArticleForm(forms.ModelForm):
 
 
 class CommentForm(forms.Form):
-    text = forms.CharField(widget=forms.Textarea, label='Comentário')
+    text = forms.CharField(
+        widget=forms.Textarea({'class': 'form-control'}),
+        label='Comentário',
+    )
