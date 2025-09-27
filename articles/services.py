@@ -1,5 +1,4 @@
-from datetime import datetime, timezone
-
+from django.utils import timezone
 from firebase_admin import db
 
 
@@ -44,5 +43,7 @@ def add_comment(article_id: int, author: str, text: str) -> None:
     new_comment_ref.set({
         'author': author or 'Anônimo',
         'text': text,
-        'created_at': datetime.now(timezone.utc).isoformat(),
+        'created_at': (
+            timezone.localtime(timezone.now()).strftime('%d/%m/%Y às %H:%M')
+        ),
     })

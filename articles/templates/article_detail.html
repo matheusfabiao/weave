@@ -49,11 +49,11 @@
                                 <div class="d-flex align-items-center">
                                     <img src="{{ comment.author.picture.url }}" alt="{{ comment.author.full_name }}">
                                     <div>
-                                        <p class="fs-6 fw-bold mb-0">Autor: {{ comment.author.full_name }}</p>
+                                        <p class="fs-6 fw-bold mb-0">Autor: {{ comment.author }}</p>
                                         <p class="mb-0"><small class="text-muted">{{ comment.created_at }}</small></p>
                                     </div>
                                 </div>
-                                <p class="card-text">{{ comment.text }}</p>
+                                <p class="card-text mt-3">{{ comment.text }}</p>
                             </div>
                         </div>
                     {% empty %}
