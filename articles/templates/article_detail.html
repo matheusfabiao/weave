@@ -78,12 +78,12 @@
                     <div class="d-flex align-items-center gap-2">
                         {% if request.user.is_authenticated and request.user == article.author.user %}
                         
-                            <a href="{% url 'article_edit' article.pk %}" class="btn btn-outline-success">Editar</a>
-                            <a href="{% url 'article_edit' article.pk %}" class="btn btn-outline-danger">Excluir</a>
+                            <a href="{% url 'article_update' article.pk %}" class="btn btn-outline-success">Editar</a>
+                            <a href="{% url 'article_update' article.pk %}" class="btn btn-outline-danger">Excluir</a>
                             
                         {% endif %}
                             
-                        <a href="{% url 'article_edit' article.pk %}" class="btn btn-outline-dark">Voltar</a>
+                        <a href="{% url 'article_update' article.pk %}" class="btn btn-outline-dark">Voltar</a>
                     </div>
                 </div>
             </div>
