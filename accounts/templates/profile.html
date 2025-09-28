@@ -13,15 +13,16 @@
                         <div class="d-flex flex-column gap-0">
                             <h1 class="display-6 fw-bold">{{ profile.full_name }}</h1>
                             <p class="text-muted mb-0">
-                                {% if profile.bio.exists %}
-                                    <small class="d-block">{{ profile.bio }}</small>
+                                {% if profile.bio %}
+                                    <i class="bi bi-file-earmark-person me-1"></i>
+                                    {{ profile.bio }}
                                 {% else %}
                                     {% if profile.user.email.exists %}
                                         <i class="bi bi-envelope me-1"></i>
-                                        <small>{{ profile.user.email }}</small>
+                                        {{ profile.user.email }}
                                     {% else %}
                                         <i class="bi bi-person-circle me-1"></i>
-                                        <small>{{ profile.user.username }}</small>
+                                        {{ profile.user.username }}
                                     {% endif %}
                                 {% endif %}
                             </p>
