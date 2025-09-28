@@ -12,7 +12,17 @@ class RegisterForm(UserCreationForm):
         UserCreationForm (class): Classe de cadastro nativa do Django
     """
 
-    email = forms.EmailField()
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'form-control'})
+    )
+    password1 = forms.CharField(
+        label='Senha',
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+    )
+    password2 = forms.CharField(
+        label='Confirmação de senha',
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+    )
 
     class Meta:
         model = User
@@ -21,9 +31,17 @@ class RegisterForm(UserCreationForm):
             'last_name',
             'username',
             'email',
-            'password1',
-            'password2',
         )
+        widgets = {
+            'first_name': forms.TextInput({'class': 'form-control'}),
+            'last_name': forms.TextInput({'class': 'form-control'}),
+            'username': forms.TextInput({'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.help_text = None
 
 
 class LoginForm(AuthenticationForm):
