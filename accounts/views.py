@@ -1,11 +1,10 @@
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, View
 
-from .forms import ProfileForm, RegisterForm, UserForm
+from .forms import LoginForm, ProfileForm, RegisterForm, UserForm
 from .models import Profile
 
 
@@ -22,7 +21,7 @@ class RegisterView(FormView):
 
 class UserLoginView(LoginView):
     template_name = 'login.html'
-    authentication_form = AuthenticationForm
+    authentication_form = LoginForm
     redirect_authenticated_user = True
 
     def get_success_url(self):

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 from .models import Profile
@@ -24,6 +24,27 @@ class RegisterForm(UserCreationForm):
             'password1',
             'password2',
         )
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label='Usuário',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite seu usuário',
+            }
+        ),
+    )
+    password = forms.CharField(
+        label='Senha',
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite sua senha',
+            }
+        ),
+    )
 
 
 class UserForm(forms.ModelForm):
