@@ -70,7 +70,6 @@ class ProfileUpdateView(View):
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(
             instance=request.user.profile,
-            files=request.FILES,
         )
         context = {
             'user_form': user_form,
