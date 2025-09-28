@@ -77,7 +77,13 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
-
+        help_texts = {'username': None}
+        widgets = {
+            'username': forms.TextInput({'class': 'form-control'}),
+            'first_name': forms.TextInput({'class': 'form-control'}),
+            'last_name': forms.TextInput({'class': 'form-control'}),
+            'email': forms.TextInput({'class': 'form-control'}),
+        }
 
 class ProfileForm(forms.ModelForm):
     """Formulário das informações referentes ao perfil
@@ -91,3 +97,10 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('bio', 'location', 'phone', 'birth_date', 'picture')
+        widgets = {
+            'bio': forms.Textarea({'class': 'form-control'}),
+            'location': forms.TextInput({'class': 'form-control'}),
+            'phone': forms.TextInput({'class': 'form-control'}),
+            'birth_date': forms.DateInput({'class': 'form-control', 'type': 'date'}),
+            'picture': forms.ClearableFileInput({'class': 'form-control'}),
+        }

@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, View
 
@@ -53,9 +53,7 @@ class ProfileUpdateView(View):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Perfil atualizado com sucesso!')
-            return reverse_lazy(
-                'profile_detail', kwargs={'pk': self.object.pk}
-            )
+            return redirect('profile_detail', pk=request.user.pk)
 
         else:
             messages.error(request, 'Por favor, corrija os erros abaixo.')
