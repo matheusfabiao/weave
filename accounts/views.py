@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, View
 
@@ -41,7 +41,8 @@ class ProfileDetailView(DetailView):
 
 
 class ProfileUpdateView(View):
-    def post(self, request, *args, **kwargs):
+    @staticmethod
+    def post(request, *args, **kwargs):
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(
             request.POST,

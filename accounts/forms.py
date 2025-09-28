@@ -85,6 +85,7 @@ class UserForm(forms.ModelForm):
             'email': forms.TextInput({'class': 'form-control'}),
         }
 
+
 class ProfileForm(forms.ModelForm):
     """Formulário das informações referentes ao perfil
     do usuário, criado a partir da instância do usuário padrão.
@@ -99,8 +100,11 @@ class ProfileForm(forms.ModelForm):
         fields = ('bio', 'location', 'phone', 'birth_date', 'picture')
         widgets = {
             'bio': forms.Textarea({'class': 'form-control'}),
-            'location': forms.TextInput({'class': 'form-control'}),
+            'location': forms.Select({'class': 'form-control'}),
             'phone': forms.TextInput({'class': 'form-control'}),
-            'birth_date': forms.DateInput({'class': 'form-control', 'type': 'date'}),
+            'birth_date': forms.DateInput({
+                'class': 'form-control',
+                'type': 'date',
+            }),
             'picture': forms.ClearableFileInput({'class': 'form-control'}),
         }
