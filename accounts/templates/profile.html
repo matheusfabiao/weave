@@ -1,1 +1,90 @@
-<h1>Perfil de {{ profile.user.username }}</h1>
+{% extends "base.html" %}
+
+{% block title %}Perfil{% endblock title %}
+
+{% block content %}
+
+    <section class="py-5">
+        <div class="container">
+            <div class="card p-4">
+                <div class="card-header bg-white">
+                    <div class="d-flex align-items-center gap-4">
+                        <img src="{{ profile.picture.url }}" alt="{{ profile.full_name }}" class="rounded-circle" style="max-width: 120px;">
+                        <div class="d-flex flex-column gap-0">
+                            <h1 class="display-6 fw-bold">{{ profile.full_name }}</h1>
+                            <p class="text-muted mb-0">
+                                {% if profile.bio.exists %}
+                                    <small class="d-block">{{ profile.bio }}</small>
+                                {% else %}
+                                    {% if profile.user.email.exists %}
+                                        <i class="bi bi-envelope me-1"></i>
+                                        <small>{{ profile.user.email }}</small>
+                                    {% else %}
+                                        <i class="bi bi-person-circle me-1"></i>
+                                        <small>{{ profile.user.username }}</small>
+                                    {% endif %}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="fs-4 fw-bold">Informações</h3>
+
+                        <div class="d-flex align-items-center gap-2">
+                            {% if request.user.is_authenticated and request.user == profile.user %}
+                                <a href="#" class="btn btn-outline-success">Editar Perfil</a>
+                            {% endif %}
+                            <a href="{% url "article_list" %}" class="btn btn-outline-primary">Voltar</a>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                        <span><i class="bi bi-person-circle me-2"></i></span>
+                        <span class="fs-5 fw-bold">Username:</span>
+                        <p class="p-2 border rounded w-100 mt-2">{{ profile.user.username }}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <span><i class="bi bi-envelope me-2"></i></span>
+                        <span class="fs-5 fw-bold">Email:</span>
+                        <p class="p-2 border rounded w-100 mt-2">{{ profile.user.email|default:"Não há email cadastrado." }}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <span><i class="bi bi-cake2 me-2"></i></span>
+                        <span class="fs-5 fw-bold">Data de Nascimento:</span>
+                        <p class="p-2 border rounded w-100 mt-2">
+                            {{ profile.birth_date|date:"d/m/Y"|default:"Não há registro." }}
+                            {% if profile.age %}
+                                ({{ profile.age }} anos)
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="mt-4">
+                        <span><i class="bi bi-phone me-2"></i></span>
+                        <span class="fs-5 fw-bold">Telefone:</span>
+                        <p class="p-2 border rounded w-100 mt-2">{{ profile.phone|default:"Não há telefone cadastrado." }}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <span><i class="bi bi-flag me-2"></i></span>
+                        <span class="fs-5 fw-bold">Nacionalidade:</span>
+                        <p class="p-2 border rounded w-100 mt-2">{{ profile.location|default:"Não há registro." }}</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-5">
+                <a href="{% url "article_list" %}" class="btn btn-primary btn-lg">Voltar para o Feed</a>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock content %}
+

@@ -31,8 +31,10 @@ class Profile(models.Model):
         return full_name or self.user.username
 
     @property
-    def age(self) -> int:
-        return date.today().year - self.birth_date.year
+    def age(self) -> int | None:
+        if self.birth_date:
+            return date.today().year - self.birth_date.year
+        return None
 
     def __str__(self) -> str:
         return self.full_name
