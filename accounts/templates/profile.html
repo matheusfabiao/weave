@@ -34,7 +34,7 @@
 
                         <div class="d-flex align-items-center gap-2">
                             {% if request.user.is_authenticated and request.user == profile.user %}
-                                <a href="#" class="btn btn-outline-success">Editar Perfil</a>
+                                <a href="{% url 'profile_update' pk=profile.pk %}" class="btn btn-outline-success">Editar Perfil</a>
                             {% endif %}
                             <a href="{% url "article_list" %}" class="btn btn-outline-primary">Voltar</a>
                         </div>

@@ -1,7 +1,30 @@
-<h1>Editar Perfil</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ profile_form.as_p }}
-  <button type="submit">Salvar</button>
-</form>
+{% extends "base.html" %}
+
+{% block title %}Editar Perfil{% endblock title %}
+
+{% block content %}
+
+    <section class="py-5 mx-auto" style="max-width: 900px;">
+        <div class="container">
+            <div class="card p-5">
+                <h1 class="display-6 fw-bold mb-5 text-center">
+                    Editar Perfil
+                </h1>
+
+                <form method="post" enctype="multipart/form-data" class="w-100 mx-auto" style="max-width: 500px;">
+                    {% csrf_token %}
+                    {{ user_form.as_p }}
+                    {{ profile_form.as_p }}
+                    <div class="d-flex justify-content-center gap-2 mt-4">
+                        <button type="submit" class="btn btn-outline-success">Salvar Alterações</button>
+                        <a href="{% url 'profile_detail' pk=request.user.pk %}" class="btn btn-outline-danger">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="{% url "home" %}" class="btn btn-primary btn-lg">Voltar para o Início</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
