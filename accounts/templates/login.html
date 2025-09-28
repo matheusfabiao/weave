@@ -1,9 +1,30 @@
-<h1>Entrar</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Entrar</button>
-</form>
-<p>
-    Não possui uma conta? <a href="{% url "register" %}">Cadastre-se.</a>
-</p>
+{% extends "base.html" %}
+
+{% block title %}Entrar{% endblock title %}
+
+{% block content %}
+
+    <section class="py-5 mx-auto" style="max-width: 900px;">
+        <div class="container">
+            <div class="card p-5">
+                <h1 class="display-6 fw-bold mb-5 text-center">
+                    Entre em sua conta
+                </h1>
+
+                <form method="post" class="mx-auto" style="max-width: 500px;">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-outline-success">Entrar</button>
+                </form>
+
+                <p class="mt-4 text-center">
+                    Não possui uma conta? <a href="{% url "register" %}">Cadastre-se.</a>
+                </p>
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="{% url "home" %}" class="btn btn-primary btn-lg">Voltar para o Início</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
