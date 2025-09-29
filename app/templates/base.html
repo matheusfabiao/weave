@@ -15,11 +15,14 @@
     {% comment %} Custom CSS (if needed) {% endcomment %}
     {% block css %}{% endblock css %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+    {% include 'components/_header.html' %}
 
-    <main>
+    <main class="container my-4">
         {% block content %}{% endblock content %}
     </main>
+
+    {% include 'components/_footer.html' %}
 
     {% comment %} Custom JS (if needed) {% endcomment %}
     {% block js %}{% endblock js %}
