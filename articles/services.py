@@ -65,7 +65,7 @@ def get_trending(limit: int = 5):
     Número de comentários pesam mais para a pontuação de popularidade (score).
     Usa cache Redis para evitar recomputar a cada chamada.
     """
-    cache_key = f"trending_articles_{limit}"
+    cache_key = f'trending_articles_{limit}'
     trending_articles = cache.get(cache_key)
 
     if trending_articles is not None:
@@ -95,5 +95,4 @@ def get_trending(limit: int = 5):
 
     # Salva no cache
     cache.set(cache_key, trending_articles, timeout=60)
-
     return trending_articles
