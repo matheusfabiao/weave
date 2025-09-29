@@ -17,6 +17,7 @@ from .services import (
     add_like,
     get_article_comments,
     get_article_likes,
+    get_trending,
 )
 
 
@@ -24,6 +25,11 @@ class ArticleListView(ListView):
     model = Article
     template_name = 'article_list.html'
     context_object_name = 'articles'
+
+    def get_context_data(self, **kwargs):  # noqa
+        context = super().get_context_data(**kwargs)
+        context['trending'] = get_trending()
+        return context
 
 
 class ArticleDetailView(DetailView):

@@ -1,0 +1,17 @@
+<aside>
+    <div class="card p-2">
+        <div class="card-body">
+            <h3 class="fs-5 fw-bold">🔥 Em alta</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, optio!</p>
+            <ul class="list-group">
+                {% for article in trending %}
+                    <li class="list-group-item">
+                        <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                    </li>
+                {% empty %}
+                    <li>Nenhum artigo em alta no momento.</li>
+                {% endfor %}                                
+            </ul>
+        </div>
+    </div>
+</aside>

@@ -1,6 +1,8 @@
 from django.utils import timezone
 from firebase_admin import db
 
+from .models import Article
+
 
 def get_article_likes(article_id: int) -> int:
     """Retorna o número de likes de um artigo no Firebase"""
@@ -36,6 +38,13 @@ def get_article_comments(article_id: int) -> list:
     return result
 
 
+def get_article_comment_count(article_id: int) -> int:
+    """Retorna o número de comentários de um artigo no Firebase."""
+    ref = db.reference(f'comments/{article_id}')
+    comments = ref.get(shallow=True)
+    return len(comments) if comments else 0
+
+
 def add_comment(article_id: int, author: str, text: str) -> None:
     """Adiciona comentário a um artigo"""
     ref = db.reference(f'comments/{article_id}')
@@ -47,3 +56,31 @@ def add_comment(article_id: int, author: str, text: str) -> None:
             timezone.localtime(timezone.now()).strftime('%d/%m/%Y às %H:%M')
         ),
     })
+
+
+def get_trending(limit: int = 5):
+    """
+    Retorna os artigos mais populares com base em likes e comentários.
+    Número de comentários pesam mais para a pontuação de popularidade (score).
+    """
+    articles = Article.objects.all()
+    article_scores = []
+
+    for article in articles:
+        likes = get_article_likes(article.id)
+        comment_count = get_article_comment_count(article.id)
+        score = likes + (comment_count * 2)
+
+        if score > 0:
+            article_scores.append({
+                'article': article,
+                'score': score,
+                'likes': likes,
+                'comments': comment_count,
+            })
+
+    sorted_articles = sorted(
+        article_scores, key=lambda x: x['score'], reverse=True
+    )
+    trending_articles = [item['article'] for item in sorted_articles]
+    return trending_articles[:limit]
