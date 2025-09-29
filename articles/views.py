@@ -58,11 +58,17 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'article_update.html'
     success_url = reverse_lazy('article_list')
 
+    def get_queryset(self):
+        return Article.objects.filter(author=self.request.user.profile)
+
 
 class ArticleDeleteView(DeleteView):
     model = Article
     template_name = 'article_delete.html'
     success_url = reverse_lazy('article_list')
+
+    def get_queryset(self):
+        return Article.objects.filter(author=self.request.user.profile)
 
 
 class ArticleLikeView(View):

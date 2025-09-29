@@ -1,5 +1,7 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, View
@@ -40,7 +42,7 @@ class ProfileDetailView(DetailView):
     context_object_name = 'profile'
 
 
-class ProfileUpdateView(View):
+class ProfileUpdateView(LoginRequiredMixin, View):
     @staticmethod
     def post(request, *args, **kwargs):
         user_form = UserForm(request.POST, instance=request.user)
@@ -76,3 +78,11 @@ class ProfileUpdateView(View):
             'profile_form': profile_form,
         }
         return render(request, 'profile_update.html', context)
+
+    def dispatch(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        if request.user.pk != pk:
+            return HttpResponseForbidden(
+                'Você não pode editar o perfil de outro usuário.'
+            )
+        return super().dispatch(request, *args, **kwargs)
