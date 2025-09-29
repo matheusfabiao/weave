@@ -46,3 +46,15 @@ def generate_ai_article(
     prompt = __generate_ai_prompt(title, idea, audience, tone, extra_notes)
     response = __generate_ai_response(prompt)
     return markdown(response)
+
+
+def generate_ai_article_resume(title, content):
+    prompt = dedent(f'''\
+        Faça um resumo curto para o artigo entitulado "{title}",
+        cujo o conteúdo completo é:
+        "{content}".
+        O resumo não deve ter no máximo 200 caracteres
+        e deve ser chamativo ao usuário.
+    ''')
+    response = __generate_ai_response(prompt)
+    return markdown(response)

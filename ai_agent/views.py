@@ -20,11 +20,12 @@ class AIArticleCreateView(View):
                 tone=instructions.get('tone'),
                 extra_notes=instructions.get('extra_notes'),
             )
-            Article.objects.create(
+            article = Article(
                 author=request.user.profile,
                 title=instructions.get('title'),
                 content=content,
             )
+            article.save()
             return redirect('article_list')
 
     @staticmethod

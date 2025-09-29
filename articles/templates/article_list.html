@@ -22,15 +22,15 @@
                                   <p class="mb-0"><small class="text-muted">{{ article.created_at }}</small></p>
                               </div>
                           </div>
-                
+
                           <h5 class="card-title fs-4">
                               <a href="{% url 'article_detail' article.pk %}" class="text-primary fw-bold">
                                   {{ article.title }}
                               </a>
                           </h5>
-                
+
                           {% if article.resume %}
-                              <p class="card-text">{{ article.resume }}</p>
+                              <p class="card-text">{{ article.resume|safe }}</p>
                           {% else %}
                               <p class="card-text">{{ article.content | truncatechars:300 | safe }}</p>
                           {% endif %}
@@ -40,13 +40,13 @@
                                   <span class="badge bg-success me-2">{{ tag.name }}</span>
                               {% endfor %}
                           {% endif %}
-                
+
                           <div class="mt-4">
                               <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">Leia mais</a>
                           </div>
                       </div>
                   </div>
-                
+
                 {% endfor %}
             </div>
 
