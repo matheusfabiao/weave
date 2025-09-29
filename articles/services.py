@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.utils import timezone
 from firebase_admin import db
 
@@ -62,7 +63,15 @@ def get_trending(limit: int = 5):
     """
     Retorna os artigos mais populares com base em likes e comentários.
     Número de comentários pesam mais para a pontuação de popularidade (score).
+    Usa cache Redis para evitar recomputar a cada chamada.
     """
+    cache_key = f"trending_articles_{limit}"
+    trending_articles = cache.get(cache_key)
+
+    if trending_articles is not None:
+        return trending_articles
+
+    # Se não está em cache, realiza os cálculos
     articles = Article.objects.all()
     article_scores = []
 
@@ -82,5 +91,9 @@ def get_trending(limit: int = 5):
     sorted_articles = sorted(
         article_scores, key=lambda x: x['score'], reverse=True
     )
-    trending_articles = [item['article'] for item in sorted_articles]
-    return trending_articles[:limit]
+    trending_articles = [item['article'] for item in sorted_articles][:limit]
+
+    # Salva no cache
+    cache.set(cache_key, trending_articles, timeout=60)
+
+    return trending_articles
