@@ -3,8 +3,32 @@ repo_url: https://github.com/matheusfabiao/weave
 repo_name: matheusfabiao/weave
 edit_uri: tree/main/docs
 
+nav:
+  - Início: index.md
+  - Guia: guide.md
+  - Sobre: about.md
+  - Aplicativos:
+    - Contas: 'apps/accounts.md'
+    - Artigos: 'apps/articles.md'
+    - Agente de IA: 'apps/ai_agent.md'
+
+
 theme:
   name: material
   language: pt-BR
   logo: assets/weave-logo.png
   favicon: assets/weave-logo.png
+  features:
+    - content.code.copy
+    - content.code.annotate
+  code:
+    highlight_theme: dracula
+  palette:
+    scheme: slate
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+      linenums: false
+  - pymdownx.superfences
