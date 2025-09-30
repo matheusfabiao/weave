@@ -1,5 +1,3 @@
-![logo do projeto](docs/assets/weave-logo.png){ width="300" }
-
 # Weave - Plataforma de Blog com IA
 
 ![Licença](https://img.shields.io/badge/license-MIT-blue.svg)
