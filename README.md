@@ -1,12 +1,14 @@
-# Weave - Rede Social para Desenvolvedores
+![logo do projeto](docs/assets/weave-logo.png){ width="300" }
+
+# Weave - Plataforma de Blog com IA
 
 ![Licença](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## 📖 Sobre
 
-O Weave é uma rede social para a comunidade de tecnologia, inspirada em plataformas como Twitter e DevMedia. Seu grande diferencial é a criação de artigos em Markdown, com a possibilidade de utilizar Inteligência Artificial para aprimorar ou gerar conteúdo.
+O **Weave** é uma plataforma de blog inteligente que utiliza agentes de IA para auxiliar na criação e gerenciamento de conteúdo.
 
-Este projeto foi desenvolvido como um ambiente para aprendizado e portfólio, demonstrando habilidades em desenvolvimento web com Django, Docker e integração com serviços de IA.
+Este projeto foi desenvolvido como um ambiente para aprendizado e portfólio, demonstrando habilidades em desenvolvimento web com Django, Docker e integração com serviços de IA. Para uma visão mais aprofundada, consulte a **[documentação completa](docs/index.md)**.
 
 ## ✨ Funcionalidades
 
@@ -20,13 +22,14 @@ Este projeto foi desenvolvido como um ambiente para aprendizado e portfólio, de
 ## 🛠️ Tecnologias Utilizadas
 
 *   **Backend:** Django
-*   **Banco de Dados:** PostgreSQL (via Docker)
+*   **Banco de Dados Principal:** PostgreSQL (via Docker)
 *   **Cache:** Redis
 *   **Inteligência Artificial:** Google Gemini
-*   **Autenticação Social:** Firebase Admin
+*   **Integração com Banco de Dados em Nuvem:** Firebase Admin
 *   **Containerização:** Docker & Docker Compose
 *   **Gerenciador de Tarefas:** Taskipy
 *   **Linter/Formatter:** Ruff
+*   **Gerenciador de Pacotes:** UV
 
 ## 🚀 Como Executar o Projeto Localmente
 
@@ -34,9 +37,9 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
 
 ### Pré-requisitos
 
-*   [Docker](https://www.docker.com/get-started)
-*   [Docker Compose](https://docs.docker.com/compose/install/)
-*   [Python 3.13+](https://www.python.org/downloads/) (para o gerenciador de pacotes `uv` e `taskipy`)
+*   [Python 3.13+](https://www.python.org/downloads/)
+*   [Docker](https://www.docker.com/get-started) e Docker Compose
+*   [uv](https://github.com/astral-sh/uv) (Gerenciador de pacotes)
 
 ### Instalação
 
@@ -46,27 +49,27 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
     cd django-blog-project
     ```
 
-2.  **Instale as dependências do projeto (Taskipy):**
+2.  **Configure as variáveis de ambiente:**
+    Copie os arquivos de exemplo e preencha com suas credenciais.
     ```bash
-    pip install taskipy
+    cp secrets/.env.example secrets/.env
+    cp secrets/firebase_credentials_example.json secrets/firebase_credentials.json
     ```
 
-3.  **Configure as variáveis de ambiente:**
-    - Renomeie o arquivo `secrets/.env.example` para `secrets/.env`.
-    - Preencha as variáveis com suas credenciais (chave secreta do Django, credenciais do banco de dados, etc.).
+3.  **Instale as dependências:**
+    O `uv sync` garante que o ambiente virtual esteja exatamente como definido no `uv.lock`.
+    ```bash
+    uv sync --locked
+    ```
 
-4.  **Configure as credenciais do Firebase:**
-    - Renomeie o arquivo `secrets/firebase_credentials_example.json` para `secrets/firebase_credentials.json`.
-    - Adicione as credenciais da sua conta de serviço do Firebase neste arquivo.
-
-5.  **Construa e inicie os containers Docker:**
-    Este comando irá construir as imagens, iniciar os containers e aplicar as migrações do banco de dados.
+4.  **Construa e inicie os containers Docker:**
+    Este comando irá construir as imagens, iniciar os serviços e aplicar as migrações do banco de dados.
     ```bash
     task build
     ```
     *Como alternativa, você pode executar `docker-compose up --build`.*
 
-6.  **Acesse a aplicação:**
+5.  **Acesse a aplicação:**
     Abra seu navegador e acesse [http://localhost:8000](http://localhost:8000).
 
 ### Comandos Úteis (via Taskipy)
