@@ -11,7 +11,7 @@ class HomeView(ListView):
     model = Article
     template_name = 'home.html'
     context_object_name = 'articles'
-    
+
     def get_context_data(self, **kwargs):  # noqa
         context = super().get_context_data(**kwargs)
         context['trending'] = get_trending()

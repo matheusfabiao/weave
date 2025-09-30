@@ -5,6 +5,14 @@ from firebase_admin import db
 from .models import Article
 
 
+def __reset_trending_cache() -> None:
+    """
+    Remove o cache dos artigos do trending quando há um novo
+    like ou comentário.
+    """
+    cache.delete('trending_articles_*')
+
+
 def get_article_likes(article_id: int) -> int:
     """Retorna o número de likes de um artigo no Firebase"""
     ref = db.reference(f'likes/{article_id}')
@@ -17,6 +25,7 @@ def add_like(article_id: int) -> None:
     ref = db.reference(f'likes/{article_id}')
     current = ref.get() or 0
     ref.set(current + 1)
+    __reset_trending_cache()
 
 
 def get_article_comments(article_id: int) -> list:
@@ -57,6 +66,7 @@ def add_comment(article_id: int, author: str, text: str) -> None:
             timezone.localtime(timezone.now()).strftime('%d/%m/%Y às %H:%M')
         ),
     })
+    __reset_trending_cache()
 
 
 def get_trending(limit: int = 5):
@@ -94,5 +104,5 @@ def get_trending(limit: int = 5):
     trending_articles = [item['article'] for item in sorted_articles][:limit]
 
     # Salva no cache
-    cache.set(cache_key, trending_articles, timeout=60)
+    cache.set(cache_key, trending_articles, timeout=60 * 5)
     return trending_articles
