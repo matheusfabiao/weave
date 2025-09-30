@@ -20,6 +20,10 @@ dev = [
     "ruff>=0.13.2",
     "taskipy>=1.14.1",
 ]
+doc = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.20",
+]
 
 [tool.ruff]
 line-length = 79
@@ -55,3 +59,5 @@ pre_migrate = 'python manage.py makemigrations'
 migrate = 'python manage.py migrate'
 
 app = 'python manage.py startapp'
+
+docs = 'mkdocs serve --dev-addr localhost:8080'

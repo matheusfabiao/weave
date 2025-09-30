@@ -1,0 +1,10 @@
+site_name: Weave
+repo_url: https://github.com/matheusfabiao/weave
+repo_name: matheusfabiao/weave
+edit_uri: tree/main/docs
+
+theme:
+  name: material
+  language: pt-BR
+  logo: assets/weave-logo.png
+  favicon: assets/weave-logo.png
