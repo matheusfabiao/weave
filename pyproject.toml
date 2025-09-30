@@ -1,7 +1,7 @@
 [project]
 name = "django-blog-project"
 version = "0.1.0"
-description = "Add your description here"
+description = "Weave é uma rede social para a comunidade de tecnologia, inspirada no Twitter, DevMedia, entre outros. Tem como grande diferencial, escrita de artigos em Markdown e uso de IA para melhorar ou escrever seus conteúdos postados."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
