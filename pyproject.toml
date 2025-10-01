@@ -10,12 +10,14 @@ dependencies = [
     "django-redis>=6.0.0",
     "firebase-admin>=7.1.0",
     "google-genai>=1.39.1",
+    "gunicorn>=23.0.0",
     "markdown>=3.9",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.21",
     "pillow>=11.3.0",
     "psycopg2-binary>=2.9.10",
     "python-decouple>=3.8",
+    "whitenoise>=6.11.0",
 ]
 
 [dependency-groups]
