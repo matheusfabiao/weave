@@ -1,0 +1,6 @@
+username,email,first_name,last_name,password,bio,location,phone,birth_date
+joao.silva,joao.silva@email.com,João,Silva,pass1234,Desenvolvedor Python apaixonado por Django.,BRAZIL,+55-11-99999-1111,1990-05-15
+maria.santos,maria.santos@email.com,Maria,Santos,pass1234,Arquiteta de software com 10 anos de experiência.,USA,+1-555-123-4567,1985-08-22
+pedro.oliveira,pedro.oliveira@email.com,Pedro,Oliveira,pass1234,Cientista de dados e entusiasta de IA.,BRAZIL,+55-21-98888-2222,1992-12-03
+ana.rodrigues,ana.rodrigues@email.com,Ana,Rodrigues,pass1234,Engenheira de machine learning.,USA,+1-555-987-6543,1988-03-30
+carlos.lima,carlos.lima@email.com,Carlos,Lima,pass1234,Desenvolvedor full-stack JavaScript.,BRAZIL,+55-31-97777-3333,1995-07-18
