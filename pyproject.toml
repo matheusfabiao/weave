@@ -46,14 +46,11 @@ lint = 'ruff check'
 pre_format = 'ruff check --fix'
 format = 'ruff format'
 
-build = 'docker-compose build --no-cache'
-post_build = 'task run'
+pre_run = 'task format && docker-compose up -d'
+run = 'python manage.py runserver'
 
-pre_run = 'task format'
-run = 'docker-compose up'
-rund = 'docker-compose up -d'
-
-down = 'docker-compose stop && docker-compose down -v'
+pre_down = 'docker-compose stop'
+down = 'docker-compose down -v'
 
 pre_migrate = 'python manage.py makemigrations'
 migrate = 'python manage.py migrate'
