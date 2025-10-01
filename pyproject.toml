@@ -10,7 +10,10 @@ dependencies = [
     "firebase-admin>=7.1.0",
     "google-genai>=1.39.1",
     "markdown>=3.9",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.21",
     "pillow>=11.3.0",
+    "psycopg2-binary>=2.9.10",
     "python-decouple>=3.8",
 ]
 
@@ -20,10 +23,7 @@ dev = [
     "ruff>=0.13.2",
     "taskipy>=1.14.1",
 ]
-doc = [
-    "mkdocs>=1.6.1",
-    "mkdocs-material>=9.6.20",
-]
+doc = []
 
 [tool.ruff]
 line-length = 79
