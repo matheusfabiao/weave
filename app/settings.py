@@ -141,6 +141,7 @@ STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "docs_build/assets"),
+    os.path.join(BASE_DIR, 'media'),
 ]
 
 MEDIA_URL = '/media/'
@@ -150,8 +151,8 @@ if DEBUG:
     INSTALLED_APPS += ['django_browser_reload']
     MIDDLEWARE += ['django_browser_reload.middleware.BrowserReloadMiddleware']
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Whitenoise Config
 WHITENOISE_USE_FINDERS = True
