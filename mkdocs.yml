@@ -32,3 +32,5 @@ markdown_extensions:
       anchor_linenums: true
       linenums: false
   - pymdownx.superfences
+
+use_directory_urls: false
