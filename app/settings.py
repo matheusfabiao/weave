@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 from decouple import Config, Csv, RepositoryEnv
+from dj_database_url import parse as db_url
 import firebase_admin
 from firebase_admin import credentials
 
@@ -89,14 +90,9 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-    }
+    'default': config(
+        'DATABASE_URL', default=f'sqlite:///{BASE_DIR / 'db.sqlite3'}', cast=db_url
+    )
 }
 
 CACHES = {
