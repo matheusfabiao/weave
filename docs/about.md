@@ -20,4 +20,12 @@ O Google possui uma plataforma voltada para o desenvolvimento de aplicativos cha
 
 ![firebase](assets/New_Firebase_logo.svg.png){ width="300" }
 
-Sua utilidade se deu por conta das interações dos usuários com as publicações, ou seja, cada `like` e `comentário` computado em nossa rede social ficará armazenada e disponível para consulta dentro do banco do Firebase. Além disso, temos uma funcionalidade de `trending`, que traduzindo para termos simples significa os posts com o maior engajamento (maior número de curtidas e comentários), no qual os dados são lidos diretamente do Firebase e o Django é o responsável por realizar os cálculos e atualizar o ranking dos artigos mais engajados e disponibilizar a informação para os usuários.
+Sua utilidade se deu por conta das interações dos usuários com as publicações, ou seja, cada `like` e `comentário` computado em nossa rede social ficará armazenada e disponível para consulta dentro do banco do Firebase. A seguir, alguns exemplos reais da aplicação:
+
+![database comments](assets/firebase_comments.png)
+
+![database likes](assets/firebase_likes.png)
+
+Além disso, temos uma funcionalidade de `trending`, que traduzindo para termos simples significa os posts com o maior engajamento (maior número de curtidas e comentários), no qual os dados são lidos diretamente do Firebase e o Django é o responsável por realizar os cálculos e atualizar o ranking dos artigos mais engajados e disponibilizar a informação para os usuários.
+
+![app trendings feature](assets/app_trendings.png)
