@@ -1,48 +1,103 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top p-1">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">
-            <i class="bi bi-soundwave"></i> Weave
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end text-bg-primary" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'article_list' %}">Artigos</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Olá, {{ user.username }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'profile_detail' user.profile.pk %}">Meu Perfil</a></li>
-                            <li><a class="dropdown-item" href="{% url 'article_create' %}">Criar Artigo</a></li>
-                            <li><a class="dropdown-item" href="{% url 'article_create_ai' %}">Criar com IA</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
-                        </ul>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Entrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Cadastrar-se</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <i class="bi bi-soundwave"></i> Weave
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="offcanvas offcanvas-end text-bg-primary"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'article_list' %}">Artigos</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Olá, {{ user.username }}
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdown"
+            >
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{% url 'profile_detail' user.profile.pk %}"
+                  >Meu Perfil</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'article_create' %}"
+                  >Criar Artigo</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'article_create_ai' %}"
+                  >Criar com IA</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <form
+                  action="{% url 'logout' %}"
+                  method="post"
+                  class="d-inline"
+                >
+                  {% csrf_token %}
+                  <button
+                    type="submit"
+                    class="dropdown-item"
+                    style="border: none; background: none; cursor: pointer"
+                  >
+                    Sair
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Cadastrar-se</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
+  </div>
 </nav>

@@ -10,7 +10,7 @@
                 <div class="card-header bg-white">
                     <h1 class="display-6 text-center fw-bold mb-4">{{ article.title }}</h1>
                     <div class="d-flex align-items-center justify-content-center mb-3">
-                        <img src="{{ article.author.picture.url }}" alt="{{ article.author.username }}" class="rounded-circle me-3" style="max-width: 50px; max-height: 50px;">
+                        <img src="{{ article.author.picture.url }}" alt="{{ article.author.username }}" class="rounded-circle me-3" style="width: 120px; height: 120px; object-fit: cover;">
                         <div>
                             <p class="fs-6 fw-bold mb-0">Autor: {{ article.author.user.username }}</p>
                             <p class="mb-0"><small class="text-muted">{{ article.created_at }}</small></p>
@@ -87,7 +87,7 @@
                         </form>
                     {% else %}
                         <p>
-                            Você precisa <a class="badge badge-warning" href="{% url 'login' %}?next={% url 'article_detail' article.pk %}">fazer login</a> para comentar.
+                            Você precisa <a class="badge bg-warning" href="{% url 'login' %}?next={% url 'article_detail' article.pk %}">fazer login</a> para comentar.
                         </p>
                     {% endif %}
 
